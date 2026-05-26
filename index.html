@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Love Story</title>
+  <meta name="description" content="A romantic anniversary website celebrating our journey, poems, travel memories, and promises." />
+  <style>
+    :root {
+      --bg: #120713;
+      --bg2: #271126;
+      --card: rgba(255,255,255,.09);
+      --glass: rgba(255,255,255,.12);
+      --text: #fff7fb;
+      --muted: #f4cfe0;
+      --rose: #ff7aa8;
+      --gold: #ffd48a;
+      --lav: #cda8ff;
+      --line: rgba(255,255,255,.18);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,122,168,.28), transparent 34rem),
+        radial-gradient(circle at top right, rgba(205,168,255,.2), transparent 34rem),
+        linear-gradient(135deg, #0b0610 0%, #1b0819 45%, #32162d 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.25) 1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255,122,168,.18) 1px, transparent 1.6px);
+      background-size: 70px 70px, 110px 110px;
+      opacity: .35;
+      z-index: -1;
+    }
+    a { color: inherit; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(18,7,19,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .nav-links a {
+      text-decoration: none;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+    .nav-links a:hover {
+      border-color: var(--line);
+      background: var(--glass);
+    }
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
+      padding: 40px 18px 26px;
+    }
+    .hero-wrap {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--glass);
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.05;
+    }
+    h1 {
+      font-size: clamp(46px, 9vw, 96px);
+      letter-spacing: -3px;
+    }
+    h2 {
+      font-size: clamp(32px, 6vw, 58px);
+      margin-bottom: 14px;
+    }
+    h3 { font-size: 25px; margin-bottom: 10px; color: var(--gold); }
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, var(--rose), var(--gold));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    p {
+      color: rgba(255,247,251,.88);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+    .lead {
+      font-size: clamp(18px, 3vw, 23px);
+      color: #ffeaf3;
+      max-width: 720px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    .btn {
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rose), #ff4f8c);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(255,79,140,.25);
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    .hero-photo {
+      position: relative;
+      min-height: 520px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      background: #000;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.65), transparent 45%);
+    }
+    .hero-caption {
+      position: absolute;
+      z-index: 2;
+      left: 24px;
+      right: 24px;
+      bottom: 22px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.32);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+    }
+    .hero-caption strong { color: var(--gold); }
+    section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 76px 18px;
+    }
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+    .note {
+      padding: clamp(22px, 4vw, 42px);
+    }
+    .note p { font-size: 18px; }
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+    .time-item {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 18px;
+      align-items: start;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+    }
+    .year {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 22px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .memory-card {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 310px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(0,0,0,.22);
+    }
+    .memory-card.tall { min-height: 430px; }
+    .memory-card img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      transition: transform .45s ease, filter .45s ease;
+    }
+    .memory-card:hover img { transform: scale(1.06); filter: saturate(1.12); }
+    figcaption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      color: #fff;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.15);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .quote-grid, .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .quote, .reason {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+    }
+    .quote p { margin: 0; font-size: 18px; }
+    .quote span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .reason {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      color: rgba(255,247,251,.9);
+      line-height: 1.55;
+    }
+    .num {
+      flex: 0 0 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--lav));
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .poem {
+      white-space: pre-line;
+      font-size: 18px;
+      line-height: 1.9;
+      color: #fff3f8;
+    }
+    .heart-divider {
+      text-align: center;
+      color: var(--rose);
+      font-size: 34px;
+      margin: 8px 0 0;
+      letter-spacing: 10px;
+    }
+    .final {
+      text-align: center;
+      padding: 70px 22px;
+    }
+    .final h2 { font-size: clamp(36px, 7vw, 72px); }
+    .final p {
+      max-width: 820px;
+      margin: 18px auto 0;
+      font-size: 19px;
+    }
+    .mini {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .counter div {
+      padding: 18px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--line);
+    }
+    .counter b {
+      display: block;
+      font-size: 30px;
+      color: var(--gold);
+    }
+    .counter span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    footer {
+      text-align: center;
+      padding: 34px 18px 50px;
+      color: var(--muted);
+    }
+    @media (max-width: 920px) {
+      .hero-wrap { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 470px; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .quote-grid, .reason-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      h1 { letter-spacing: -1px; }
+      .hero { padding-top: 26px; }
+      .hero-photo { min-height: 430px; border-radius: 24px; }
+      section { padding: 56px 14px; }
+      .gallery { grid-template-columns: 1fr; }
+      .memory-card, .memory-card.tall { min-height: 420px; }
+      .time-item { grid-template-columns: 1fr; }
+      .counter { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Our Love Story ❤️</div>
+      <div class="nav-links">
+        <a href="#story">Story</a>
+        <a href="#thailand2024">Thailand 2024</a>
+        <a href="#memories2025">2025</a>
+        <a href="#poetry">Poetry</a>
+        <a href="#letter">Love Letter</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-wrap">
+      <div>
+        <div class="eyebrow">For my Shupid baby • Since 2021 • Anniversary from 17 June 2022</div>
+        <h1><span class="gradient-text">Our Love Story</span></h1>
+        <p class="lead">
+          Some people become memories. You became my favorite place, my softest prayer,
+          my adventure partner, my safe feeling, and the person I still want to hold hands with
+          through every unknown road.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#letter">Read my heart</a>
+          <a class="btn secondary" href="#thailand2024">See our memories</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="images/IMG_5155.jpeg" alt="Our Love Story hero photo">
+        <div class="hero-caption">
+          <strong>17 June 2022</strong>
+          <div>The day I first proposed to you — the day I count as our anniversary and a date I never want to forget.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="story">
+    <div class="section-intro">
+      <h2>Our Journey</h2>
+      <p>From knowing you in 2021, to my first proposal on 17 June 2022, to Thailand, Vietnam, selfies, cab rides, bike rides, food, laughter, arguments, repair, and love — this page is a small home for everything we became.</p>
+    </div>
+    <div class="timeline">
+      <div class="time-item glass">
+        <div class="year">2021</div>
+        <div>
+          <h3>When I Knew You</h3>
+          <p>I have known you since <strong>2021</strong>. Long before all our trips and milestones, your presence had already started becoming something important to me.</p>
+        </div>
+      </div>
+      <div class="time-item glass">
+        <div class="year">2022</div>
+        <div>
+          <h3>The Proposal That Became Our Anniversary</h3>
+          <p>I first proposed to you on <strong>17 June 2022</strong>, and that is the date I hold in my heart as our anniversary — the beginning of the love story I still choose every day.</p>
+        </div>
+      </div>
+      <div class="time-item glass">
+        <div class="year">2024</div>
+        <div>
+          <h3>Thailand Memories</h3>
+          <p>Thailand gave us adventure, tiger park memories, underwater moments, Pattaya nights, museum photos, bike rides, food, and the feeling that we could turn any place into our own little world.</p>
+        </div>
+      </div>
+      <div class="time-item glass">
+        <div class="year">2025</div>
+        <div>
+          <h3>Vietnam & Thailand Again</h3>
+          <p>Vietnam gave us mountains, water, boats, night streets, and beautiful views. Thailand gave us more closeness, more selfies, more laughter, and more reasons to remember us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="thailand2024">
+    <div class="section-intro">
+      <h2>Thailand 2024</h2>
+      <p>The trip that gave us adventure, courage, funny photos, soft smiles, and memories I still replay in my heart.</p>
+    </div>
+    <div class="gallery">
+      <figure class="memory-card ">
+          <img src="images/IMG_9024.jpeg" alt="The night we kept smiling under city lights" loading="lazy">
+          <figcaption>The night we kept smiling under city lights</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9038.jpeg" alt="A warm elevator selfie from Thailand 2024" loading="lazy">
+          <figcaption>A warm elevator selfie from Thailand 2024</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9042.jpeg" alt="Close to you, calm in the middle of everything" loading="lazy">
+          <figcaption>Close to you, calm in the middle of everything</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9102.jpeg" alt="Underwater world, but you were still my favorite view" loading="lazy">
+          <figcaption>Underwater world, but you were still my favorite view</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_3719.jpeg" alt="A fairytale moment inside a heart" loading="lazy">
+          <figcaption>A fairytale moment inside a heart</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9132.jpeg" alt="A smile framed by lights" loading="lazy">
+          <figcaption>A smile framed by lights</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5963.jpeg" alt="Holding hands like the world was ours" loading="lazy">
+          <figcaption>Holding hands like the world was ours</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_4505.jpeg" alt="Our playful museum memory" loading="lazy">
+          <figcaption>Our playful museum memory</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_4733.jpeg" alt="Silver lights, soft smiles, and us" loading="lazy">
+          <figcaption>Silver lights, soft smiles, and us</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5972.jpeg" alt="Looking at you from a swing of memories" loading="lazy">
+          <figcaption>Looking at you from a swing of memories</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5083.jpeg" alt="Stairs, hearts, and a quiet hug" loading="lazy">
+          <figcaption>Stairs, hearts, and a quiet hug</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5155.jpeg" alt="A picture full of flowers and forever feelings" loading="lazy">
+          <figcaption>A picture full of flowers and forever feelings</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5476.jpeg" alt="A temple view and a memory I keep close" loading="lazy">
+          <figcaption>A temple view and a memory I keep close</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5672.jpeg" alt="A simple selfie with your beautiful smile" loading="lazy">
+          <figcaption>A simple selfie with your beautiful smile</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_0284.jpeg" alt="Water activities and the day you stayed beside me" loading="lazy">
+          <figcaption>Water activities and the day you stayed beside me</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_0290.jpeg" alt="Pattaya night lights with you" loading="lazy">
+          <figcaption>Pattaya night lights with you</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_6072.jpeg" alt="Adventure with courage and laughter" loading="lazy">
+          <figcaption>Adventure with courage and laughter</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_6209.jpeg" alt="The tiger park memory we will never forget" loading="lazy">
+          <figcaption>The tiger park memory we will never forget</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_6272.jpeg" alt="A cute tiger-hat moment" loading="lazy">
+          <figcaption>A cute tiger-hat moment</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_0650.jpeg" alt="A small happy pause in a big journey" loading="lazy">
+          <figcaption>A small happy pause in a big journey</figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <section id="memories2025">
+    <div class="section-intro">
+      <h2>Vietnam & Thailand 2025</h2>
+      <p>The next chapter: sea views, neon nights, hotel mirrors, quiet rooms, boat rides, and your smile traveling with me everywhere.</p>
+    </div>
+    <div class="gallery">
+      <figure class="memory-card ">
+          <img src="images/IMG_7920.jpeg" alt="Vietnam 2025 — Ha Long Bay and a peaceful blue memory" loading="lazy">
+          <figcaption>Vietnam 2025 — Ha Long Bay and a peaceful blue memory</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7559.jpeg" alt="Vietnam 2025 — the water, the cliffs, and us" loading="lazy">
+          <figcaption>Vietnam 2025 — the water, the cliffs, and us</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_8708.jpeg" alt="Vietnam 2025 — a bus ride that still makes me smile" loading="lazy">
+          <figcaption>Vietnam 2025 — a bus ride that still makes me smile</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_8705.jpeg" alt="Vietnam 2025 — the funniest background memory" loading="lazy">
+          <figcaption>Vietnam 2025 — the funniest background memory</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_8082.jpeg" alt="Thailand 2025 — elevator lights and closeness" loading="lazy">
+          <figcaption>Thailand 2025 — elevator lights and closeness</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7876.jpeg" alt="Thailand 2025 — city lights and your smile" loading="lazy">
+          <figcaption>Thailand 2025 — city lights and your smile</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_5993.jpeg" alt="Thailand 2025 — quiet room, warm hearts" loading="lazy">
+          <figcaption>Thailand 2025 — quiet room, warm hearts</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9292.jpeg" alt="Thailand 2025 — night streets and soft smiles" loading="lazy">
+          <figcaption>Thailand 2025 — night streets and soft smiles</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7991.jpeg" alt="Thailand 2025 — mirror selfie and one more memory" loading="lazy">
+          <figcaption>Thailand 2025 — mirror selfie and one more memory</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_0228.jpeg" alt="Thailand 2025 — a selfie I want to keep forever" loading="lazy">
+          <figcaption>Thailand 2025 — a selfie I want to keep forever</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9949.jpeg" alt="Thailand 2025 — red, gold, and your smile" loading="lazy">
+          <figcaption>Thailand 2025 — red, gold, and your smile</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_9884.jpeg" alt="Thailand 2025 — simple and beautiful" loading="lazy">
+          <figcaption>Thailand 2025 — simple and beautiful</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7578.jpeg" alt="Thailand 2025 — you, me, and a calm room" loading="lazy">
+          <figcaption>Thailand 2025 — you, me, and a calm room</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7538.jpeg" alt="Thailand 2025 — together in a happy pause" loading="lazy">
+          <figcaption>Thailand 2025 — together in a happy pause</figcaption>
+        </figure>
+<figure class="memory-card ">
+          <img src="images/IMG_7916.jpeg" alt="Thailand 2025 — another soft moment with you" loading="lazy">
+          <figcaption>Thailand 2025 — another soft moment with you</figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <section id="reasons">
+    <div class="section-intro">
+      <h2>25 Things I Loved With You</h2>
+      <p>These are not just moments. They are proof that you gave me care, closeness, courage, laughter, food, comfort, and love in many small ways.</p>
+    </div>
+    <div class="reason-grid">
+      <div class="reason"><div class="num">1</div><div>I enjoyed cuddling with you.</div></div><div class="reason"><div class="num">2</div><div>I enjoyed our private closeness and the way we felt comfortable with each other.</div></div><div class="reason"><div class="num">3</div><div>I enjoyed the way you took care of me.</div></div><div class="reason"><div class="num">4</div><div>I enjoyed the way you dressed up with me and took selfies with me.</div></div><div class="reason"><div class="num">5</div><div>I enjoyed doing adventures with you and how you cooperated with my plans.</div></div><div class="reason"><div class="num">6</div><div>I enjoyed taking showers with you.</div></div><div class="reason"><div class="num">7</div><div>I enjoyed walking with you while holding hands.</div></div><div class="reason"><div class="num">8</div><div>I enjoyed you preparing food for me.</div></div><div class="reason"><div class="num">9</div><div>I enjoyed the way you took interest in taking pictures of me.</div></div><div class="reason"><div class="num">10</div><div>I enjoyed the way you welcomed me on the first day.</div></div><div class="reason"><div class="num">11</div><div>I enjoyed the way you ordered food for me.</div></div><div class="reason"><div class="num">12</div><div>I enjoyed the sudden kiss on my forehead when I was sleeping.</div></div><div class="reason"><div class="num">13</div><div>I enjoyed drinking with you.</div></div><div class="reason"><div class="num">14</div><div>I enjoyed celebrating our last night in Pattaya.</div></div><div class="reason"><div class="num">15</div><div>I enjoyed going with you on bike rides.</div></div><div class="reason"><div class="num">16</div><div>I enjoyed when you helped me when I did not know how to swim.</div></div><div class="reason"><div class="num">17</div><div>I enjoyed when you sent me your selfie from the flight.</div></div><div class="reason"><div class="num">18</div><div>I enjoyed when you wore Indian dresses.</div></div><div class="reason"><div class="num">19</div><div>I enjoyed when you brought so much food for me.</div></div><div class="reason"><div class="num">20</div><div>I enjoyed when you bought me a bag.</div></div><div class="reason"><div class="num">21</div><div>I enjoyed when I kissed you for the first time.</div></div><div class="reason"><div class="num">22</div><div>I enjoyed when you bought me dresses.</div></div><div class="reason"><div class="num">23</div><div>I enjoyed when we held hands in the cab.</div></div><div class="reason"><div class="num">24</div><div>I enjoyed when you bought my favorite food.</div></div><div class="reason"><div class="num">25</div><div>I enjoyed when you bought me a phone case before water activities.</div></div>
+    </div>
+  </section>
+
+  <section id="poetry">
+    <div class="section-intro">
+      <h2>Poetry For You</h2>
+      <p>Some love is too big for normal sentences, so I kept it here as poetry.</p>
+    </div>
+    <div class="glass note">
+      <div class="poem">In the soft hum of the world, I find
+a whisper of your love, gentle and kind.
+Like moonlight dancing over the sea,
+your heart is where I long to be.
+
+Your laugh turns ordinary days
+into tiny festivals of light.
+Your eyes carry a calmness
+that makes even my storms feel quiet.
+
+In the dark, your eyes shine bright,
+guiding me through the deepest night.
+Nothing feels more beautiful or true
+than the way your gaze brings me back to you.
+
+We may fight, and storms may start,
+but love still knocks inside my heart.
+Before the night can close its eyes,
+I still want us to heal, not hide.
+
+Hand in hand, through thick and thin,
+through every place our stories begin,
+no matter what happens, whatever we do,
+I still want to walk this life with you.</div>
+    </div>
+  </section>
+
+  <section id="quotes">
+    <div class="section-intro">
+      <h2>Romance Quotes</h2>
+      <p>Original romance lines written with a soft, dreamy, emotional feeling.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote"><p>“Even if every road becomes a maze, I will still recognize you by the way my heart becomes calm.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“You are not my perfect ending. You are the scene I keep choosing, even after the credits should have rolled.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“If my life was a love story, your smile would be the opening song I never skip.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“When the world becomes too loud, your hand in mine feels like subtitles for my heart.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“I do not need a thousand stars. I only need the one person who makes ordinary nights feel like a sky.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“Maybe love is not always soft music. Sometimes it is two stubborn hearts learning the same song again.”</p><span>— Our Love Story</span></div>
+    </div>
+  </section>
+
+  <section id="healing">
+    <div class="section-intro">
+      <h2>If Any Word Hurt You</h2>
+      <p>This section is not here to blame you. It is here because love should also know how to repair.</p>
+    </div>
+    <div class="glass note">
+      <p>
+        Baby, if anything on this page brings back pain, I want you to know that my intention is not to hurt you.
+        I created this to remember the good, to honor what we shared, and to remind you that beneath every fight,
+        I still see the person I loved, cared for, traveled with, laughed with, and held close.
+      </p>
+      <p>
+        Some words between us have been painful. Some moments were heavy. But I do not want our story to be remembered
+        only by hurt. I want it to also remember your care, your softness, your strength, your smile, your food, your kisses,
+        your photos, your dresses, your courage, and the way you made ordinary places feel special.
+      </p>
+      <p>
+        I am not perfect. I may have made mistakes. But this page is my way of saying: I remember the beautiful parts too.
+        I remember you with love.
+      </p>
+    </div>
+  </section>
+
+  <section id="letter">
+    <div class="section-intro">
+      <h2>My Anniversary Letter</h2>
+    </div>
+    <div class="glass note">
+      <p><strong>To my beloved, Happy anniversary.</strong></p>
+      <p>
+        I love you beyond words. It is not just a sentence I say; it is an emotion I feel whenever I think of you. I have known you since 2021, and ever since I first proposed on 17 June 2022, that day has lived in my heart as our anniversary.
+        I love how you look because it reflects the kindness in your soul. There is a calmness in your eyes,
+        the kind that makes me feel seen and safe. Your smile does not just curve your lips; it lights up a room quietly,
+        like a sunrise I never get tired of seeing.
+      </p>
+      <p>
+        I love you because you have a softness that is not weakness. It is strength wrapped in gentleness.
+        You care in ways that feel warm, real, and rare. You bring comfort simply by being yourself,
+        soft enough to soothe and strong enough to hold space for others.
+      </p>
+      <p>
+        I love you because you are thoughtful. You ask questions that carry meaning. You seek connection,
+        not just answers. You bring depth with quiet boldness, and you make me feel that love can be both playful and serious,
+        soft and strong, simple and unforgettable.
+      </p>
+      <p>
+        I enjoyed your care, your smile, your kisses, your food, your selfies, your adventurous side, your Indian dresses,
+        your flight selfie, your hand in the cab, your forehead kiss while I was sleeping, and every small thing you did
+        that made me feel loved.
+      </p>
+      <p>
+        I just love you, and I can no longer imagine what I would be without you. ❤️
+      </p>
+    </div>
+  </section>
+
+  <section id="countdown">
+    <div class="section-intro">
+      <h2>Countdown To Our Next Anniversary</h2>
+      <p>Every day that passes is one more line in our story.</p>
+    </div>
+    <div class="glass note">
+      <div class="counter" id="counter">
+        <div><b id="days">0</b><span>Days</span></div>
+        <div><b id="hours">0</b><span>Hours</span></div>
+        <div><b id="mins">0</b><span>Minutes</span></div>
+        <div><b id="secs">0</b><span>Seconds</span></div>
+      </div>
+      <div class="mini">Counting toward 17 June every year.</div>
+    </div>
+  </section>
+
+  <section class="final glass">
+    <h2><span class="gradient-text">I choose our story.</span></h2>
+    <p>
+      Not because it was always easy, but because the beautiful moments were real.
+      Because your smile stayed with me. Because your care mattered.
+      Because even after everything, when I think of love, I still think of you.
+    </p>
+    <div class="heart-divider">♡ ♡ ♡</div>
+  </section>
+
+  <footer>
+    Made with love for the one who turned trips, selfies, food, fights, and tiny moments into a love story.
+  </footer>
+
+  <script>
+    function nextAnniversary() {
+      const now = new Date();
+      let year = now.getFullYear();
+      let target = new Date(year, 5, 17, 0, 0, 0);
+      if (target < now) target = new Date(year + 1, 5, 17, 0, 0, 0);
+      return target;
+    }
+
+    function updateCounter() {
+      const now = new Date();
+      const target = nextAnniversary();
+      const diff = target - now;
+      const d = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+      const h = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
+      const m = Math.max(0, Math.floor((diff / (1000 * 60)) % 60));
+      const s = Math.max(0, Math.floor((diff / 1000) % 60));
+      document.getElementById("days").textContent = d;
+      document.getElementById("hours").textContent = h;
+      document.getElementById("mins").textContent = m;
+      document.getElementById("secs").textContent = s;
+    }
+    updateCounter();
+    setInterval(updateCounter, 1000);
+  </script>
+</body>
+</html>
