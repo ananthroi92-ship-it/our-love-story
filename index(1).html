@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Love Story</title>
+  <meta name="description" content="A romantic anniversary love story filled with memories, poetry, travel, and promises." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #120812;
+      --bg-soft: #1d0d1d;
+      --card: rgba(255, 255, 255, 0.09);
+      --card-strong: rgba(255, 255, 255, 0.14);
+      --text: #fff7fb;
+      --muted: #f4cddd;
+      --rose: #ff5f9e;
+      --gold: #ffd28a;
+      --violet: #8f6cff;
+      --shadow: 0 24px 80px rgba(0,0,0,.38);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 95, 158, .35), transparent 32%),
+        radial-gradient(circle at 88% 20%, rgba(143, 108, 255, .28), transparent 32%),
+        linear-gradient(135deg, #120812 0%, #2a0f27 48%, #0f0c23 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,210,138,.55) 1px, transparent 1px);
+      background-size: 42px 42px, 88px 88px;
+      opacity: .16;
+      z-index: 0;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .heart {
+      position: absolute;
+      bottom: -30px;
+      color: rgba(255, 158, 194, .65);
+      animation: floatUp linear infinite;
+      font-size: 16px;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0); opacity: 0; }
+      15% { opacity: .85; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .page { position: relative; z-index: 2; }
+    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(18, 8, 18, .62);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--gold);
+      letter-spacing: .4px;
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 54px 0 36px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; margin: 0; }
+    h1 {
+      font-size: clamp(52px, 8vw, 104px);
+      line-height: .92;
+      letter-spacing: -2px;
+    }
+    h1 span { color: var(--gold); display: block; }
+    .hero p {
+      color: #ffe5ef;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.75;
+      margin: 24px 0;
+      max-width: 650px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 13px 18px;
+      color: #1e0715;
+      background: linear-gradient(135deg, var(--gold), #ff8ebd);
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 14px 34px rgba(255, 95, 158, .24);
+    }
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: none;
+    }
+
+    .photo-stack {
+      position: relative;
+      min-height: 560px;
+    }
+    .main-photo {
+      position: absolute;
+      inset: 0 0 0 40px;
+      border-radius: 42px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.2);
+      transform: rotate(2deg);
+    }
+    .main-photo img, .mini-photo img, .gallery-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mini-photo {
+      position: absolute;
+      left: 0;
+      bottom: 32px;
+      width: 42%;
+      height: 250px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 7px solid rgba(255,247,251,.75);
+      transform: rotate(-7deg);
+    }
+    .badge {
+      position: absolute;
+      right: 12px;
+      bottom: 14px;
+      background: rgba(18,8,18,.78);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 24px;
+      padding: 18px;
+      max-width: 250px;
+      box-shadow: var(--shadow);
+    }
+    .badge strong { display:block; color: var(--gold); margin-bottom: 5px; }
+    .badge small { color: var(--muted); line-height: 1.5; }
+
+    section { padding: 70px 0; }
+    .section-title { text-align: center; margin-bottom: 32px; }
+    .section-title h2 { font-size: clamp(36px, 5vw, 62px); }
+    .section-title p { color: var(--muted); max-width: 760px; margin: 12px auto 0; line-height: 1.7; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 16px 50px rgba(0,0,0,.18);
+    }
+    .card h3 { font-size: 28px; color: var(--gold); margin-bottom: 10px; }
+    .card p, .card li { color: #ffe7f0; line-height: 1.75; }
+    .card ul { padding-left: 18px; margin: 0; }
+
+    .poem-box {
+      background: linear-gradient(135deg, rgba(255,95,158,.18), rgba(143,108,255,.16));
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 34px;
+      padding: clamp(24px, 4vw, 44px);
+      box-shadow: var(--shadow);
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .poem-box p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.55;
+      margin: 0;
+      color: #fff6fb;
+    }
+    .poem-box .small-poem {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      color: var(--muted);
+      margin-top: 22px;
+      white-space: pre-line;
+    }
+
+    .timeline { max-width: 900px; margin: 0 auto; position: relative; }
+    .timeline::before { content:""; position:absolute; left: 18px; top: 0; bottom:0; width:2px; background: linear-gradient(var(--rose), var(--gold)); }
+    .moment { position: relative; padding-left: 58px; margin-bottom: 22px; }
+    .moment::before { content:"❤"; position:absolute; left:0; top:0; width:36px; height:36px; display:grid; place-items:center; border-radius:50%; background: linear-gradient(135deg, var(--rose), var(--gold)); color:#210313; font-size:14px; }
+    .moment-content { background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 24px; padding: 20px; }
+    .moment-content strong { color: var(--gold); }
+    .moment-content p { color: #ffe7f0; margin: 8px 0 0; line-height: 1.7; }
+
+    .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .gallery-card {
+      height: 270px;
+      border-radius: 26px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 18px 48px rgba(0,0,0,.22);
+      background: rgba(255,255,255,.08);
+    }
+    .gallery-card:nth-child(2n) { transform: translateY(20px); }
+    .gallery-card .caption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(18,8,18,.72);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #ffe7f0;
+      backdrop-filter: blur(8px);
+    }
+
+    .enjoy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .enjoy-item {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: #ffe7f0;
+      line-height: 1.55;
+    }
+
+    .quote-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .quote {
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 28px;
+      padding: 22px;
+    }
+    .quote p { color:#fff3f8; line-height:1.7; margin:0; }
+    .quote small { color: var(--gold); margin-top: 16px; display:block; }
+
+    .hurt-note {
+      max-width: 880px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 32px;
+      padding: clamp(22px, 4vw, 40px);
+    }
+    .hurt-note p { color:#ffe6ef; line-height:1.8; }
+    .word-cloud { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    .word-cloud span { padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.09); color:#ffd4e3; border:1px solid rgba(255,255,255,.12); font-size:13px; }
+
+    .final-letter {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 36px;
+      padding: clamp(26px, 5vw, 54px);
+      box-shadow: var(--shadow);
+    }
+    .final-letter h2 { color: var(--gold); font-size: clamp(36px, 5vw, 58px); }
+    .final-letter p { color:#fff0f6; line-height:1.85; font-size:16px; }
+
+    footer { padding: 36px 0 60px; text-align:center; color: var(--muted); }
+
+    .fade { opacity: 0; transform: translateY(26px); transition: .8s ease; }
+    .fade.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero-grid, .cards, .quote-strip { grid-template-columns: 1fr; }
+      .photo-stack { min-height: 520px; }
+      .main-photo { left: 0; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .gallery-card { height: 250px; }
+      .gallery-card:nth-child(2n) { transform: none; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 22px, 1120px); }
+      .hero { min-height: auto; padding-top: 36px; }
+      .photo-stack { min-height: 430px; }
+      .main-photo { border-radius: 30px; }
+      .mini-photo { width: 52%; height: 180px; border-width: 5px; }
+      .badge { left: 14px; right: 14px; bottom: -20px; max-width: none; }
+      section { padding: 54px 0; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-card { height: 380px; }
+      .enjoy-grid { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+  <div class="page">
+    <nav>
+      <div class="container nav-inner">
+        <div class="brand">Our Love Story</div>
+        <div class="nav-links">
+          <a href="#journey">Journey</a>
+          <a href="#memories">Memories</a>
+          <a href="#poetry">Poetry</a>
+          <a href="#letter">Letter</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <div class="fade">
+          <div class="kicker">💌 Happy Anniversary, my love</div>
+          <h1>Our <span>Love Story</span></h1>
+          <p>
+            From the day we met on 30 May 2023, every trip, every laugh, every fight, every kiss,
+            every silent hand-hold, and every small care became a chapter I never want to close.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#letter">Read My Heart</a>
+            <a class="btn secondary" href="#memories">See Our Memories</a>
+          </div>
+        </div>
+        <div class="photo-stack fade">
+          <div class="main-photo"><img src="images/IMG_7920.jpeg" alt="Our romantic travel memory"></div>
+          <div class="mini-photo"><img src="images/IMG_8082.jpeg" alt="Our neon night memory"></div>
+          <div class="badge"><strong>Vietnam & Thailand, 2025</strong><small>Two countries, many memories, one heart that keeps choosing you.</small></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="poetry">
+      <div class="container">
+        <div class="section-title fade">
+          <h2>A Poem For You</h2>
+          <p>For the girl whose smile makes ordinary days feel like scenes from a love anime.</p>
+        </div>
+        <div class="poem-box fade">
+          <p>
+            If love had a sky, you would be my moon.<br>
+            If memories had music, you would be my favourite tune.<br>
+            If life became a story written only for two,<br>
+            every page, every line, would begin and end with you.
+          </p>
+          <div class="small-poem">
+In the dark, your eyes shimmer bright,
+Guiding me through the deepest night.
+No beauty compares, nothing can be,
+As enchanting as your gaze on me.
+
+Love's palette is rich, like a rainbow's kiss,
+But in your love, I find colours I can't miss.
+Hand in hand, through every unknown view,
+I still choose every tomorrow with you.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title fade">
+          <h2>Anime Romance Lines, But For Us</h2>
+          <p>Not copied from a story — written like we are the main characters.</p>
+        </div>
+        <div class="quote-strip">
+          <div class="quote fade"><p>“In every universe, every timeline, and every quiet ending, my heart still finds its way back to you.”</p><small>— Our anime episode one</small></div>
+          <div class="quote fade"><p>“You are not just my favourite person. You are the scene I replay when life feels heavy.”</p><small>— The comfort arc</small></div>
+          <div class="quote fade"><p>“Even when we fight like rivals, I know my soul recognizes you as home.”</p><small>— The promise arc</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="container">
+        <div class="section-title fade">
+          <h2>Our Journey</h2>
+          <p>Some memories are not just photos. They are proof that we lived, loved, travelled, healed, and held on.</p>
+        </div>
+        <div class="timeline">
+          <div class="moment fade"><div class="moment-content"><strong>30 May 2023 — The Day We Met</strong><p>The day that quietly became the beginning of everything I now call beautiful.</p></div></div>
+          <div class="moment fade"><div class="moment-content"><strong>Thailand 2025</strong><p>Pattaya nights, bike rides, laughter, food, water activities, and memories that felt like a movie only we understood.</p></div></div>
+          <div class="moment fade"><div class="moment-content"><strong>Vietnam 2025</strong><p>Boats, neon lights, walking streets, selfies, and the feeling that travelling with you makes the world softer.</p></div></div>
+          <div class="moment fade"><div class="moment-content"><strong>Today</strong><p>I am still learning love, still learning you, and still choosing us with all my heart.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="memories">
+      <div class="container">
+        <div class="section-title fade">
+          <h2>Travel Memories</h2>
+          <p>Vietnam and Thailand were not just trips. They were chapters where love wore travel clothes.</p>
+        </div>
+        <div class="gallery">
+          <div class="gallery-card fade"><img src="images/IMG_7920.jpeg" alt="Vietnam boat memory"><div class="caption">Vietnam — calm water, beautiful views, and us.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_8082.jpeg" alt="Vietnam neon street"><div class="caption">Night lights, walking streets, and your smile.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_9292.jpeg" alt="Thailand street selfie"><div class="caption">Thailand — one more selfie, one more memory.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_7991.jpeg" alt="Mirror couple photo"><div class="caption">Mirror moments that still feel warm.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_8708.jpeg" alt="Elevator couple selfie"><div class="caption">Close, quiet, and completely ours.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_7876.jpeg" alt="Couple indoor selfie"><div class="caption">Soft smiles, simple days, real love.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_0228.jpeg" alt="Outdoor couple selfie"><div class="caption">The kind of picture that feels like home.</div></div>
+          <div class="gallery-card fade"><img src="images/IMG_5993.jpeg" alt="Room selfie"><div class="caption">A small moment, a big place in my heart.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title fade">
+          <h2>Things I Enjoyed With You</h2>
+          <p>These are the little and big things that stayed with me.</p>
+        </div>
+        <div class="enjoy-grid fade">
+          <div class="enjoy-item">I enjoyed cuddling with you and feeling close to you.</div>
+          <div class="enjoy-item">I enjoyed our private romantic moments and the comfort we shared.</div>
+          <div class="enjoy-item">I enjoyed the way you took care of me.</div>
+          <div class="enjoy-item">I enjoyed the way you dressed up with me and took selfies with me.</div>
+          <div class="enjoy-item">I enjoyed doing adventures with you and how you cooperated with my plans.</div>
+          <div class="enjoy-item">I enjoyed walking with you while holding hands.</div>
+          <div class="enjoy-item">I enjoyed you preparing food for me and ordering food for me.</div>
+          <div class="enjoy-item">I enjoyed the way you took interest in taking pictures of me.</div>
+          <div class="enjoy-item">I enjoyed how welcoming you were on the first day.</div>
+          <div class="enjoy-item">I enjoyed the sudden kiss on my forehead when I was sleeping.</div>
+          <div class="enjoy-item">I enjoyed celebrating our last night in Pattaya with you.</div>
+          <div class="enjoy-item">I enjoyed going with you on bike rides.</div>
+          <div class="enjoy-item">I enjoyed how you helped me when I didn’t know how to swim.</div>
+          <div class="enjoy-item">I enjoyed when you sent me your selfie from the flight.</div>
+          <div class="enjoy-item">I enjoyed seeing you in Indian dresses.</div>
+          <div class="enjoy-item">I enjoyed when you bought food, a bag, dresses, my favourite food, and a phone case for me before water activities.</div>
+          <div class="enjoy-item">I enjoyed our first kiss and every hand-hold in the cab.</div>
+          <div class="enjoy-item">I enjoyed every version of you that chose to stay with me.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="hurt-note fade">
+          <h2>In Case My Words Hurt You</h2>
+          <p>
+            My love, I created many notes for you because I wanted you to feel special, loved, and remembered.
+            But if anything I wrote made you feel hurt, pressured, misunderstood, or sad, I want you to know this:
+            my intention was never to wound your heart. I wanted to say good things too, because beyond our fights,
+            beyond the difficult words, I still see the beautiful woman I fell in love with.
+          </p>
+          <p>
+            Some words between us have hurt deeply. I do not want those words to be the final definition of us.
+            I want us to remember the care, the laughter, the forehead kisses, the trips, the food, the selfies,
+            and the way we still tried to find each other after every storm.
+          </p>
+          <div class="word-cloud" aria-label="Words that hurt but should not define us">
+            <span>hurt</span><span>anger</span><span>misunderstanding</span><span>distance</span><span>ego</span><span>pain</span><span>tears</span><span>silence</span><span>healing</span><span>forgiveness</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cards">
+          <div class="card fade"><h3>Birthday Love</h3><p>Happy Birthday, my Shupid baby. Today is about reminding you that your smile, your heart, your care, and your presence make my world brighter than I know how to explain.</p></div>
+          <div class="card fade"><h3>Women’s Day Love</h3><p>While the world celebrates Women’s Day, I celebrate you — your strength, your kindness, your mother-like care, and the way you make hard days feel easier.</p></div>
+          <div class="card fade"><h3>Valentine Feeling</h3><p>Your love is the melody I want to play, a song that lingers and never fades. You are not only my lover, but also my best friend, my comfort, and my treasure.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="letter">
+      <div class="container">
+        <div class="final-letter fade">
+          <h2>My Anniversary Letter To You</h2>
+          <p>
+            To my beloved, Happy Anniversary. I love you beyond words. It is not just a sentence; it is the emotion I feel whenever I think of you.
+          </p>
+          <p>
+            I love how you look because it reflects the kindness in your soul. There is a calmness in your eyes, the kind that makes me feel seen and safe. Your smile does not just curve your lips; it lights up a room quietly, like a sunrise I never want to miss.
+          </p>
+          <p>
+            I love you because you have softness that is not weakness. It is strength wrapped in gentleness. You care in ways that feel warm, real, and rare. Your sweetness is not loud or performative; it is quiet, consistent, and sincere.
+          </p>
+          <p>
+            There is a softness in how you carry yourself, gentle yet grounded, like someone who has been through challenges but still chooses tenderness. The way you look is not just beautiful; it is honest. You show up as you are, and that is what makes you unforgettable.
+          </p>
+          <p>
+            I love you because you are thoughtful. You ask questions that carry meaning. You seek connection, not just answers. You bring depth with quiet boldness, like someone who wants to be truly seen and understood.
+          </p>
+          <p>
+            I just love you, and I can no longer imagine what I would be without you. Whatever happens, wherever life takes us, a part of my heart will always call you home. ❤️
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">Made with love, memories, apologies, laughter, and a heart that still chooses you.</div>
+    </footer>
+  </div>
+
+  <script>
+    const heartWrap = document.getElementById('hearts');
+    const symbols = ['❤', '♡', '✦', '💗'];
+    for (let i = 0; i < 34; i++) {
+      const span = document.createElement('span');
+      span.className = 'heart';
+      span.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = (8 + Math.random() * 10) + 's';
+      span.style.animationDelay = (Math.random() * 8) + 's';
+      span.style.fontSize = (12 + Math.random() * 22) + 'px';
+      heartWrap.appendChild(span);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
