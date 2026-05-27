@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Love Story</title>
+  <meta name="description" content="A romantic anniversary website celebrating our story, memories, poetry, and promises." />
+  <style>
+    :root {
+      --bg1: #140814;
+      --bg2: #2a1030;
+      --card: rgba(255,255,255,0.08);
+      --card-strong: rgba(255,255,255,0.12);
+      --text: #fff8fb;
+      --muted: #e7ccda;
+      --pink: #ff7aa8;
+      --rose: #ffb0c6;
+      --gold: #ffd79a;
+      --lav: #cdb4ff;
+      --shadow: 0 18px 45px rgba(0,0,0,0.30);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,122,168,0.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(205,180,255,0.16), transparent 30%),
+        radial-gradient(circle at bottom center, rgba(255,215,154,0.14), transparent 25%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px);
+      background-size: 26px 26px, 38px 38px;
+      background-position: 0 0, 15px 15px;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 0;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(20, 8, 20, 0.60);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .nav-inner,
+    .wrap,
+    .hero-wrap,
+    .section-intro,
+    .timeline,
+    .postcard-grid,
+    .quote-grid,
+    .reason-grid,
+    .final,
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav a,
+    .nav button {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.62rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      transition: transform .2s ease, background .2s ease;
+      cursor: pointer;
+    }
+
+    .nav a:hover,
+    .nav button:hover,
+    .btn:hover { transform: translateY(-2px); }
+
+    .hero {
+      padding: 52px 0 26px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .hero-text,
+    .hero-art,
+    .note,
+    .counter-box,
+    .final {
+      padding: 26px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: var(--rose);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 0.98;
+      margin-bottom: 14px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff8fb, #ffbad0 44%, #ffe0a5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 62ch;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn,
+    .pdf-btn,
+    .nav-pdf-btn {
+      appearance: none;
+      border: none;
+      text-decoration: none;
+      color: #2a1022;
+      background: linear-gradient(135deg, var(--pink), var(--gold));
+      border-radius: 999px;
+      font-weight: 800;
+      padding: 0.95rem 1.2rem;
+      box-shadow: 0 12px 30px rgba(255,122,168,0.22);
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: none;
+    }
+
+    .pdf-loading { opacity: .75; pointer-events: none; }
+
+    .hero-art {
+      overflow: hidden;
+      position: relative;
+      min-height: 420px;
+      background:
+        radial-gradient(circle at 80% 12%, rgba(255,255,255,0.28), transparent 18%),
+        radial-gradient(circle at 18% 18%, rgba(255,122,168,0.24), transparent 24%),
+        radial-gradient(circle at 50% 60%, rgba(205,180,255,0.18), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    }
+
+    .moon {
+      position: absolute;
+      top: 34px;
+      right: 34px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff, #ffe3af 55%, #ffd08c 100%);
+      box-shadow: 0 0 38px rgba(255, 223, 164, 0.35);
+    }
+
+    .stars span {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+
+    .stars span:nth-child(1){top:72px; left:52px}
+    .stars span:nth-child(2){top:118px; left:188px}
+    .stars span:nth-child(3){top:160px; right:118px}
+    .stars span:nth-child(4){top:222px; right:58px}
+    .stars span:nth-child(5){top:274px; left:90px}
+
+    .hill {
+      position: absolute;
+      bottom: -20px;
+      width: 120%;
+      left: -10%;
+      height: 180px;
+      border-radius: 50% 50% 0 0;
+      background: linear-gradient(180deg, rgba(44,17,53,0.2), rgba(14,6,22,0.92));
+    }
+
+    .silhouette {
+      position: absolute;
+      bottom: 86px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+    }
+
+    .silhouette::before,
+    .silhouette::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 56px;
+      height: 120px;
+      background: rgba(8,3,12,0.92);
+      border-radius: 28px 28px 10px 10px;
+    }
+
+    .silhouette::before {
+      left: 18px;
+      transform: rotate(-3deg);
+    }
+
+    .silhouette::after {
+      right: 18px;
+      transform: rotate(3deg);
+    }
+
+    .head {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(8,3,12,0.95);
+      top: 24px;
+    }
+
+    .head.left { left: 28px; }
+    .head.right { right: 28px; }
+
+    .heart-float {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0.9;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.2));
+    }
+
+    .heart-float.one { top: 120px; right: 100px; }
+    .heart-float.two { top: 175px; left: 120px; }
+    .hero-note {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: .98rem;
+    }
+
+    section { padding: 30px 0; }
+    .section-intro { margin-bottom: 18px; }
+    .section-intro h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      margin-bottom: 8px;
+    }
+    .section-intro p {
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 72ch;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .time-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 22px;
+      align-items: start;
+    }
+
+    .year {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold);
+      background: rgba(255,255,255,0.05);
+      padding: 12px 14px;
+      border-radius: 16px;
+      text-align: center;
+      letter-spacing: .4px;
+    }
+
+    .postcard-grid,
+    .quote-grid,
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .postcard {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      box-shadow: var(--shadow);
+      padding: 18px;
+      isolation: isolate;
+    }
+
+    .postcard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--scene, linear-gradient(135deg, rgba(255,122,168,.2), rgba(255,215,154,.16)));
+      opacity: 1;
+      z-index: -2;
+    }
+
+    .postcard::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 100%, rgba(0,0,0,0.45), transparent 42%),
+        linear-gradient(to top, rgba(16,8,18,0.76), rgba(16,8,18,0.12));
+      z-index: -1;
+    }
+
+    .stamp {
+      width: fit-content;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #2e1224;
+      background: rgba(255,238,244,0.92);
+      border-radius: 999px;
+      padding: 0.42rem 0.7rem;
+      margin-bottom: 12px;
+    }
+
+    .scene-icon {
+      font-size: 2.1rem;
+      line-height: 1;
+      margin-bottom: 68px;
+      display: inline-block;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.18));
+    }
+
+    .postcard h3 {
+      margin-bottom: 6px;
+      font-size: 1.28rem;
+    }
+
+    .postcard p {
+      color: #fff0f6;
+      line-height: 1.68;
+      font-size: 0.98rem;
+      margin-bottom: 0;
+    }
+
+    .postcard .mini-line {
+      margin-top: 10px;
+      color: #ffe8f0;
+      font-style: italic;
+      font-size: 0.92rem;
+    }
+
+    .quote,
+    .reason,
+    .note,
+    .counter-box,
+    .time-item,
+    .final {
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .quote, .reason { padding: 20px; }
+    .quote p { line-height: 1.7; color: #fff1f7; }
+    .quote span { color: var(--rose); font-size: .92rem; }
+
+    .reason { display: flex; gap: 12px; align-items: flex-start; }
+    .num {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--gold));
+      color: #2c1124;
+      font-weight: 800;
+    }
+
+    .poem {
+      white-space: pre-line;
+      color: #fff0f6;
+      line-height: 1.95;
+      font-size: 1.03rem;
+    }
+
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .counter > div {
+      text-align: center;
+      padding: 18px 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .counter b {
+      display: block;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      margin-bottom: 6px;
+      color: var(--gold);
+    }
+    .mini { margin-top: 14px; color: var(--muted); }
+    .heart-divider {
+      margin-top: 16px;
+      letter-spacing: 10px;
+      color: var(--rose);
+      font-size: 1.25rem;
+    }
+
+    footer {
+      padding: 20px 0 42px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 920px) {
+      .hero-wrap,
+      .postcard-grid,
+      .quote-grid,
+      .reason-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-wrap { grid-template-columns: 1fr; }
+      .hero-art { min-height: 360px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner { justify-content: center; }
+      .nav-links { justify-content: center; }
+      .postcard-grid,
+      .quote-grid,
+      .reason-grid,
+      .counter { grid-template-columns: 1fr; }
+      .time-item { grid-template-columns: 1fr; }
+      .hero { padding-top: 30px; }
+      .hero-text, .hero-art, .note, .counter-box, .final { padding: 20px; }
+      .scene-icon { margin-bottom: 34px; }
+    }
+
+    @media print {
+      .nav, .actions, .nav-pdf-btn, .pdf-btn { display: none !important; }
+      body { background: #140814 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .postcard, .quote, .reason, .time-item, .note, .final, .counter-box, .hero-art, .hero-text {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Our Love Story ❤️</div>
+      <div class="nav-links">
+        <a href="#story">Story</a>
+        <a href="#thailand2024">Thailand 2024</a>
+        <a href="#memories2025">2025</a>
+        <a href="#poetry">Poetry</a>
+        <a href="#letter">Love Letter</a>
+        <button class="nav-pdf-btn" id="downloadPdfNav" type="button">Download PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-wrap">
+      <div class="hero-text glass">
+        <div class="eyebrow">For my Shupid baby • Since 2021 • Anniversary from 17 June 2022</div>
+        <h1><span class="gradient-text">Our Love Story</span></h1>
+        <p class="lead">
+          Some people become memories. You became my favorite place, my softest prayer,
+          my adventure partner, my safe feeling, and the person I still want to hold hands with
+          through every unknown road.
+        </p>
+        <p class="lead">
+          This version keeps our story private and dreamy — not with direct photos, but with
+          romantic illustrated memory cards inspired by everything we lived, loved, laughed at,
+          and carried in our hearts.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#letter">Read my heart</a>
+          <a class="btn secondary" href="#thailand2024">See our memories</a>
+          <button class="btn pdf-btn" id="downloadPdfHero" type="button">Download as PDF</button>
+        </div>
+      </div>
+
+      <div class="hero-art glass">
+        <div class="moon"></div>
+        <div class="stars">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="silhouette">
+          <div class="head left"></div>
+          <div class="head right"></div>
+        </div>
+        <div class="hill"></div>
+        <div class="heart-float one">💗</div>
+        <div class="heart-float two">✨</div>
+        <div class="hero-note">
+          <strong>17 June 2022</strong><br>
+          The day I first proposed to you — the date I hold as our anniversary,
+          and a beginning I never want to forget.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="story">
+    <div class="section-intro">
+      <h2>Our Journey</h2>
+      <p>From knowing you in 2021, to my first proposal on 17 June 2022, to Thailand, Vietnam, selfies, cab rides, bike rides, food, laughter, arguments, repair, and love — this page is a small home for everything we became.</p>
+    </div>
+    <div class="timeline">
+      <div class="time-item">
+        <div class="year">2021</div>
+        <div>
+          <h3>When I Knew You</h3>
+          <p>I have known you since <strong>2021</strong>. Long before all our trips and milestones, your presence had already started becoming something important to me.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="year">2022</div>
+        <div>
+          <h3>The Proposal That Became Our Anniversary</h3>
+          <p>I first proposed to you on <strong>17 June 2022</strong>, and that is the date I hold in my heart as our anniversary — the beginning of the love story I still choose every day.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="year">2024</div>
+        <div>
+          <h3>Thailand Memories</h3>
+          <p>Thailand gave us adventure, courage, underwater moments, Pattaya nights, museum memories, bike rides, food, and the feeling that we could turn any place into our own little world.</p>
+        </div>
+      </div>
+      <div class="time-item">
+        <div class="year">2025</div>
+        <div>
+          <h3>Vietnam & Thailand Again</h3>
+          <p>Vietnam gave us mountains, water, boats, night streets, and beautiful views. Thailand gave us more closeness, more laughter, more softness, and more reasons to remember us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="thailand2024">
+    <div class="section-intro">
+      <h2>Thailand 2024 — Illustrated Memories</h2>
+      <p>Instead of direct photos, I turned our Thailand 2024 trip into dreamy memory postcards.</p>
+    </div>
+    <div class="postcard-grid">
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,136,161,.35), rgba(108,44,132,.30)), radial-gradient(circle at 80% 20%, rgba(255,229,159,.45), transparent 24%), linear-gradient(180deg, #3a1743, #1a0d24);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🌃</div>
+        <h3>Pattaya Night Lights</h3>
+        <p>The city glowed, but it still felt softer because you were there. A night filled with light, smiles, and the feeling that even busy streets could turn romantic.</p>
+        <div class="mini-line">“Under city lights, I still found home in you.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(108,179,255,.34), rgba(63,106,175,.30)), radial-gradient(circle at 30% 22%, rgba(255,255,255,.35), transparent 18%), linear-gradient(180deg, #173254, #0f1a2e);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🐠</div>
+        <h3>Underwater World</h3>
+        <p>We watched another world move behind glass, but my favorite sight was still the way we shared wonder together.</p>
+        <div class="mini-line">“Even underwater, my favorite view was us.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,194,120,.35), rgba(194,111,53,.28)), radial-gradient(circle at 72% 22%, rgba(255,245,189,.42), transparent 18%), linear-gradient(180deg, #5a2f1d, #1f1210);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🐯</div>
+        <h3>Tiger Park Courage</h3>
+        <p>That day carried thrill, courage, and one of those unforgettable stories that stays alive every time we remember the trip.</p>
+        <div class="mini-line">“Adventure felt easier when you were beside me.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,179,197,.36), rgba(177,102,150,.28)), radial-gradient(circle at 50% 18%, rgba(255,255,255,.34), transparent 16%), linear-gradient(180deg, #5a214a, #1e0d1d);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🎨</div>
+        <h3>Playful Museum Memory</h3>
+        <p>Funny poses, sweet closeness, and the kind of day where even being silly together felt like a love language.</p>
+        <div class="mini-line">“You made even playful moments feel precious.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,225,151,.35), rgba(255,139,139,.22)), radial-gradient(circle at 20% 18%, rgba(255,249,220,.38), transparent 18%), linear-gradient(180deg, #6c3e20, #24110c);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🏍️</div>
+        <h3>Bike Ride Chapter</h3>
+        <p>A simple ride became a warm memory because it was another small way we moved through the world together.</p>
+        <div class="mini-line">“Even the road felt romantic with you.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(122,214,181,.32), rgba(95,154,199,.28)), radial-gradient(circle at 82% 18%, rgba(239,253,226,.38), transparent 18%), linear-gradient(180deg, #1f564c, #122129);">
+        <div class="stamp">THAILAND 2024</div>
+        <div class="scene-icon">🫶</div>
+        <h3>Holding On To Us</h3>
+        <p>Cab rides, hand-holding, soft pauses, and all those little in-between moments that quietly became some of my favorites.</p>
+        <div class="mini-line">“Love lived in the little things too.”</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="memories2025">
+    <div class="section-intro">
+      <h2>Vietnam & Thailand 2025 — Illustrated Memories</h2>
+      <p>The next chapter, reimagined as soft romantic scenes and travel postcards.</p>
+    </div>
+    <div class="postcard-grid">
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(110,207,255,.34), rgba(91,112,214,.24)), radial-gradient(circle at 18% 18%, rgba(255,255,255,.34), transparent 18%), linear-gradient(180deg, #1a4463, #101b31);">
+        <div class="stamp">VIETNAM 2025</div>
+        <div class="scene-icon">🚤</div>
+        <h3>Ha Long Bay</h3>
+        <p>Water, cliffs, quiet skies, and that unforgettable feeling of sharing something beautiful side by side.</p>
+        <div class="mini-line">“Blue water, calm heart, and you.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,124,166,.34), rgba(116,63,156,.28)), radial-gradient(circle at 76% 20%, rgba(255,255,255,.32), transparent 16%), linear-gradient(180deg, #471e53, #170d23);">
+        <div class="stamp">VIETNAM 2025</div>
+        <div class="scene-icon">🌆</div>
+        <h3>Neon Street Walks</h3>
+        <p>Night streets, bright colors, and a closeness that made every place feel a little more magical.</p>
+        <div class="mini-line">“The lights were loud, but our memory felt soft.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,218,167,.33), rgba(255,146,172,.22)), radial-gradient(circle at 40% 18%, rgba(255,252,238,.40), transparent 18%), linear-gradient(180deg, #5b2a28, #1d1114);">
+        <div class="stamp">VIETNAM 2025</div>
+        <div class="scene-icon">🚌</div>
+        <h3>Bus Ride Smiles</h3>
+        <p>Another moving moment, another memory saved — proof that even ordinary rides could become part of something sweet.</p>
+        <div class="mini-line">“Even the road knew we were writing a story.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,182,193,.35), rgba(171,121,200,.27)), radial-gradient(circle at 74% 22%, rgba(255,255,255,.33), transparent 18%), linear-gradient(180deg, #4a1d3f, #190f23);">
+        <div class="stamp">THAILAND 2025</div>
+        <div class="scene-icon">🪞</div>
+        <h3>Mirror Selfie Mood</h3>
+        <p>Reflections, closeness, and that modern little romance of keeping a moment forever in a frame.</p>
+        <div class="mini-line">“Some mirrors reflect more than faces — they reflect a chapter.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(255,225,173,.34), rgba(255,128,163,.28)), radial-gradient(circle at 18% 18%, rgba(255,249,233,.34), transparent 18%), linear-gradient(180deg, #654024, #23130d);">
+        <div class="stamp">THAILAND 2025</div>
+        <div class="scene-icon">🏨</div>
+        <h3>Quiet Room, Warm Hearts</h3>
+        <p>There are memories that do not need a crowd. Just a room, a soft night, and the comfort of being close to you.</p>
+        <div class="mini-line">“The quietest places held the warmest feelings.”</div>
+      </article>
+
+      <article class="postcard" style="--scene: linear-gradient(160deg, rgba(125,175,255,.34), rgba(119,227,216,.28)), radial-gradient(circle at 80% 20%, rgba(255,255,255,.34), transparent 18%), linear-gradient(180deg, #17445c, #10202a);">
+        <div class="stamp">THAILAND 2025</div>
+        <div class="scene-icon">🌙</div>
+        <h3>Night Streets Again</h3>
+        <p>The next chapter gave us more smiles, more softness, and more reasons to feel that love can travel anywhere.</p>
+        <div class="mini-line">“Wherever we went, our story followed.”</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="enjoyed">
+    <div class="section-intro">
+      <h2>Things I Enjoyed With You</h2>
+      <p>I wanted to say good things too, especially if anything ever hurt you. These are the moments I still remember with warmth.</p>
+    </div>
+    <div class="reason-grid">
+      <div class="reason"><div class="num">1</div><div>I enjoyed cuddling with you.</div></div>
+      <div class="reason"><div class="num">2</div><div>I enjoyed our private closeness and the way we felt comfortable with each other.</div></div>
+      <div class="reason"><div class="num">3</div><div>I enjoyed the way you took care of me.</div></div>
+      <div class="reason"><div class="num">4</div><div>I enjoyed the way you dressed up with me and took selfies with me.</div></div>
+      <div class="reason"><div class="num">5</div><div>I enjoyed doing adventures with you and how you cooperated with my plans.</div></div>
+      <div class="reason"><div class="num">6</div><div>I enjoyed taking showers with you.</div></div>
+      <div class="reason"><div class="num">7</div><div>I enjoyed walking with you while holding hands.</div></div>
+      <div class="reason"><div class="num">8</div><div>I enjoyed you preparing food for me.</div></div>
+      <div class="reason"><div class="num">9</div><div>I enjoyed the way you took interest in taking pictures of me.</div></div>
+      <div class="reason"><div class="num">10</div><div>I enjoyed the way you welcomed me on the first day.</div></div>
+      <div class="reason"><div class="num">11</div><div>I enjoyed the way you ordered food for me.</div></div>
+      <div class="reason"><div class="num">12</div><div>I enjoyed the sudden kiss on my forehead when I was sleeping.</div></div>
+      <div class="reason"><div class="num">13</div><div>I enjoyed drinking with you.</div></div>
+      <div class="reason"><div class="num">14</div><div>I enjoyed celebrating our last night in Pattaya.</div></div>
+      <div class="reason"><div class="num">15</div><div>I enjoyed going with you on bike rides.</div></div>
+      <div class="reason"><div class="num">16</div><div>I enjoyed when you helped me when I did not know how to swim.</div></div>
+      <div class="reason"><div class="num">17</div><div>I enjoyed when you sent me your selfie from the flight.</div></div>
+      <div class="reason"><div class="num">18</div><div>I enjoyed when you wore Indian dresses.</div></div>
+      <div class="reason"><div class="num">19</div><div>I enjoyed when you brought so much food for me.</div></div>
+      <div class="reason"><div class="num">20</div><div>I enjoyed when you bought me a bag.</div></div>
+      <div class="reason"><div class="num">21</div><div>I enjoyed when I kissed you for the first time.</div></div>
+      <div class="reason"><div class="num">22</div><div>I enjoyed when you bought me dresses.</div></div>
+      <div class="reason"><div class="num">23</div><div>I enjoyed when we held hands in the cab.</div></div>
+      <div class="reason"><div class="num">24</div><div>I enjoyed when you bought my favorite food.</div></div>
+      <div class="reason"><div class="num">25</div><div>I enjoyed when you bought me a phone case before water activities.</div></div>
+    </div>
+  </section>
+
+  <section id="poetry">
+    <div class="section-intro">
+      <h2>Poetry For You</h2>
+      <p>Some love is too big for normal sentences, so I kept it here as poetry.</p>
+    </div>
+    <div class="note wrap">
+      <div class="poem">In the soft hum of the world, I find
+A whisper of your love, gentle and kind.
+Like the moonlight that dances on the sea,
+Your heart is where I long to be.
+
+In the dark, your eyes shine bright,
+Guiding me through the deepest night.
+Nothing's prettier, nothing feels as true,
+As the soft calm I always find in you.
+
+Love's like colors in a rainbow's sky,
+But in your love, I find colors that make me sigh.
+Blushing with affection, in a tender hue,
+Painted by the love I see in you.
+
+We might fight, storms might brew,
+But before bedtime, I still want us to make things new.
+Hand in hand, through whatever we go through,
+Till the very end, I still want to walk with you.
+
+Sweeter than chocolate, softer than cake,
+Beautiful like flowers by a quiet lake.
+Strong like coffee, wild like music's beat,
+With you, even ordinary moments turn sweet.</div>
+    </div>
+  </section>
+
+  <section id="quotes">
+    <div class="section-intro">
+      <h2>Romance Quotes</h2>
+      <p>Soft, dreamy lines written for our story.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote"><p>“Even if every road becomes a maze, I will still recognize you by the way my heart becomes calm.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“You are not just a memory to me. You are the feeling that keeps returning like a favorite song.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“If my life was a love story, your smile would be the opening song I never skip.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“When the world becomes too loud, your hand in mine feels like subtitles for my heart.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“I do not need a thousand stars. I only need the one person who makes ordinary nights feel like a sky.”</p><span>— Our Love Story</span></div>
+      <div class="quote"><p>“Maybe love is not always soft music. Sometimes it is two stubborn hearts learning the same song again.”</p><span>— Our Love Story</span></div>
+    </div>
+  </section>
+
+  <section id="healing">
+    <div class="section-intro">
+      <h2>If Any Word Hurt You</h2>
+      <p>This section is not here to blame you. It is here because love should also know how to repair.</p>
+    </div>
+    <div class="note wrap">
+      <p>
+        Baby, if anything on this page brings back pain, I want you to know that my intention is not to hurt you.
+        I created this to remember the good, to honor what we shared, and to remind you that beneath every fight,
+        I still see the person I loved, cared for, traveled with, laughed with, and held close.
+      </p>
+      <p>
+        Some words between us have been painful. Some moments were heavy. But I do not want our story to be remembered
+        only by hurt. I want it to also remember your care, your softness, your strength, your smile, your food, your kisses,
+        your photos, your dresses, your courage, and the way you made ordinary places feel special.
+      </p>
+      <p>
+        I am not perfect. I may have made mistakes. But this page is my way of saying: I remember the beautiful parts too.
+        I remember you with love.
+      </p>
+    </div>
+  </section>
+
+  <section id="letter">
+    <div class="section-intro">
+      <h2>My Anniversary Letter</h2>
+    </div>
+    <div class="note wrap">
+      <p><strong>To my beloved, Happy anniversary.</strong></p>
+      <p>
+        I love you beyond words. It is not just a sentence I say; it is an emotion I feel whenever I think of you.
+        I have known you since 2021, and ever since I first proposed on 17 June 2022, that day has lived in my heart as our anniversary.
+      </p>
+      <p>
+        I love how you look because it reflects the kindness in your soul. There is a calmness in your eyes,
+        the kind that makes me feel seen and safe. Your smile does not just curve your lips; it lights up a room quietly,
+        like a sunrise I never get tired of seeing.
+      </p>
+      <p>
+        I love you because you have a softness that is not weakness. It is strength wrapped in gentleness.
+        You care in ways that feel warm, real, and rare. You bring comfort simply by being yourself,
+        soft enough to soothe and strong enough to hold space for others.
+      </p>
+      <p>
+        I love you because you are thoughtful. You ask questions that carry meaning. You seek connection,
+        not just answers. You bring depth with quiet boldness, and you make me feel that love can be both playful and serious,
+        soft and strong, simple and unforgettable.
+      </p>
+      <p>
+        I enjoyed your care, your smile, your kisses, your food, your selfies, your adventurous side, your Indian dresses,
+        your flight selfie, your hand in the cab, your forehead kiss while I was sleeping, and every small thing you did
+        that made me feel loved.
+      </p>
+      <p>
+        I just love you, and I can no longer imagine what I would be without you. ❤️
+      </p>
+    </div>
+  </section>
+
+  <section id="countdown">
+    <div class="section-intro">
+      <h2>Countdown To Our Next Anniversary</h2>
+      <p>Every day that passes is one more line in our story.</p>
+    </div>
+    <div class="counter-box wrap">
+      <div class="counter" id="counter">
+        <div><b id="days">0</b><span>Days</span></div>
+        <div><b id="hours">0</b><span>Hours</span></div>
+        <div><b id="mins">0</b><span>Minutes</span></div>
+        <div><b id="secs">0</b><span>Seconds</span></div>
+      </div>
+      <div class="mini">Counting toward 17 June every year.</div>
+    </div>
+  </section>
+
+  <section class="final wrap">
+    <h2><span class="gradient-text">I choose our story.</span></h2>
+    <p>
+      Not because it was always easy, but because the beautiful moments were real.
+      Because your smile stayed with me. Because your care mattered.
+      Because even after everything, when I think of love, I still think of you.
+    </p>
+    <div class="heart-divider">♡ ♡ ♡</div>
+  </section>
+
+  <footer>
+    Made with love for the one who turned trips, laughter, food, fights, and tiny moments into a love story.<br>
+    This version uses original illustrated memory cards, so you do not need to upload any photo files.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    function nextAnniversary() {
+      const now = new Date();
+      let year = now.getFullYear();
+      let target = new Date(year, 5, 17, 0, 0, 0);
+      if (target < now) target = new Date(year + 1, 5, 17, 0, 0, 0);
+      return target;
+    }
+
+    function updateCounter() {
+      const now = new Date();
+      const target = nextAnniversary();
+      const diff = target - now;
+      const d = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+      const h = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
+      const m = Math.max(0, Math.floor((diff / (1000 * 60)) % 60));
+      const s = Math.max(0, Math.floor((diff / 1000) % 60));
+      document.getElementById("days").textContent = d;
+      document.getElementById("hours").textContent = h;
+      document.getElementById("mins").textContent = m;
+      document.getElementById("secs").textContent = s;
+    }
+
+    function downloadLoveStoryPdf() {
+      const buttons = [document.getElementById("downloadPdfNav"), document.getElementById("downloadPdfHero")].filter(Boolean);
+      buttons.forEach((button) => {
+        button.classList.add("pdf-loading");
+        button.textContent = "Preparing PDF...";
+      });
+
+      const options = {
+        margin: [0.2, 0.2, 0.2, 0.2],
+        filename: 'our-love-story-anniversary.pdf',
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#140814',
+          scrollY: 0
+        },
+        jsPDF: {
+          unit: 'in',
+          format: 'a4',
+          orientation: 'portrait'
+        },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+
+      if (window.html2pdf) {
+        html2pdf().set(options).from(document.body).save().finally(() => {
+          buttons.forEach((button) => {
+            button.classList.remove("pdf-loading");
+            button.textContent = button.id === "downloadPdfHero" ? "Download as PDF" : "Download PDF";
+          });
+        });
+      } else {
+        buttons.forEach((button) => {
+          button.classList.remove("pdf-loading");
+          button.textContent = button.id === "downloadPdfHero" ? "Download as PDF" : "Download PDF";
+        });
+        window.print();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCounter();
+      setInterval(updateCounter, 1000);
+      document.getElementById('downloadPdfNav').addEventListener('click', downloadLoveStoryPdf);
+      document.getElementById('downloadPdfHero').addEventListener('click', downloadLoveStoryPdf);
+    });
+  </script>
+</body>
+</html>
